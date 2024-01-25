@@ -17,6 +17,7 @@ jobs:
       - run: npx cypress info
       - cypress/run-tests:
           cypress-command: npx cypress run
+          start-command: yarn start
 workflows:
   testing:
     jobs:

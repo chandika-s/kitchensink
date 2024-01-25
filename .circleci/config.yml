@@ -28,8 +28,3 @@ workflows:
   testing:
     jobs:
       - linux-build
-          filters:
-            branches:
-              only:
-                - test
-  

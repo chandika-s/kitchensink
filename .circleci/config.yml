@@ -10,8 +10,9 @@ jobs:
     steps:
       - checkout
         # run on 2 machines using Chrome browser
-      - cypress/install: 
-          post-install: "npm run build"
+      - cypress/install:
+          package-manager: yarn
+          install-command: yarn install
       - run: npx cypress cache list
       - run: npx cypress info
       - cypress/run-tests:

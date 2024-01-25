@@ -1,17 +1,12 @@
-# testing using CircleCI orb
-# see https://on.cypress.io/circleci-orb
 
-# for non-orb configuration see old commit
-# https://github.com/cypress-io/cypress-example-kitchensink/blob/aabb10cc1bb9dee88e1bf28e0af5e9661427ee7a/circle.yml
-
-# to use CircleCI orbs need to use version >= 2.1
 version: 2.1
 orbs:
-  # use Cypress orb from CircleCI registry
   cypress: cypress-io/cypress@3.3.0
   
 jobs: 
   linux-build:
+    docker:
+      - image: cypress/base:14.16.0
     steps:
       - checkout
         # run on 2 machines using Chrome browser
@@ -19,11 +14,8 @@ jobs:
           post-install: "npm run build"
       - run: npx cypress cache list
       - run: npx cypress info
-      - cypress/run:
-          start-command: 'npm run start'
-          install-browsers: true
-          cypress-command: 'npx cypress run --browser chrome --record --parallel'
-          parallelism: 2
+      - cypress/run-tests:
+          cypress-command: npx cypress run
 workflows:
   testing:
     jobs:
